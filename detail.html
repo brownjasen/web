@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子商城 - 商品详情</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                电子<span>商城</span>
+            </a>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="搜索商品...">
+                <button id="search-btn">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </button>
+            </div>
+            <nav>
+                <a href="cart.html" class="nav-item nav-cart">
+                    <div class="cart-icon"></div>
+                    <span class="nav-line-2">购物车</span>
+                    <span id="cart-count-badge" class="cart-count">0</span>
+                </a>
+                <div id="user-menu-container">
+                    <a href="login.html" class="nav-item">
+                        <span class="nav-line-1">你好, 请登录</span>
+                        <span class="nav-line-2">账户列表</span>
+                    </a>
+                </div>
+                <a href="#" class="nav-item nav-logout" onclick="handleLogout(event)" id="logout-btn" style="display: none;" title="退出登录">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-line-2">退出</span>
+                </a>
+                </nav>
+        </div>
+    </header>
+    <div class="container" id="product-detail">
+        
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
+

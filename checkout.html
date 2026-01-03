@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子商城 - 填写收货地址</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                电子<span>商城</span>
+            </a>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="搜索商品...">
+                <button id="search-btn">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </button>
+            </div>
+            <nav>
+                <a href="cart.html" class="nav-item nav-cart">
+                    <div class="cart-icon"></div>
+                    <span class="nav-line-2">购物车</span>
+                    <span id="cart-count-badge" class="cart-count">0</span>
+                </a>
+                <div id="user-menu-container">
+                    <a href="login.html" class="nav-item">
+                        <span class="nav-line-1">你好, 请登录</span>
+                        <span class="nav-line-2">账户列表</span>
+                    </a>
+                </div>
+                <a href="#" class="nav-item nav-logout" onclick="handleLogout(event)" id="logout-btn" style="display: none;" title="退出登录">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-line-2">退出</span>
+                </a>
+                </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>填写收货地址</h2>
+        <div class="checkout-layout">
+            <div class="address-form-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <p style="color: #666; margin: 0;">快速填入预设地址</p>
+                    <button type="button" class="btn btn-secondary" onclick="loadDefaultAddress()" style="padding: 8px 16px; font-size: 0.9rem;">
+                        使用默认地址
+                    </button>
+                </div>
+                <form id="address-form" onsubmit="handlePlaceOrderWithOrder(event)">
+                    <div class="form-group">
+                        <label for="fullname">收货人姓名</label>
+                        <input type="text" id="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">手机号码</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">详细地址</label>
+                        <textarea id="address" rows="3" required></textarea>
+                    </div>
+                    <div class="order-summary-mini">
+                        <h3>订单汇总</h3>
+                        <p>商品总额: <span id="checkout-total" class="price">¥0.00</span></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交订单</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Page specific init
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLoginRedirect(); 
+            loadCheckoutTotal();
+        });
+    </script>
+</body>
+</html>
+

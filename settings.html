@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子商城 - 账户设置</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                电子<span>商城</span>
+            </a>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="搜索商品...">
+                <button id="search-btn">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </button>
+            </div>
+            <nav>
+                <a href="cart.html" class="nav-item nav-cart">
+                    <div class="cart-icon"></div>
+                    <span class="nav-line-2">购物车</span>
+                    <span id="cart-count-badge" class="cart-count">0</span>
+                </a>
+                <div id="user-menu-container">
+                    <a href="login.html" class="nav-item">
+                        <span class="nav-line-1">你好, 请登录</span>
+                        <span class="nav-line-2">账户列表</span>
+                    </a>
+                </div>
+                <a href="#" class="nav-item nav-logout" onclick="handleLogout(event)" id="logout-btn" style="display: none;" title="退出登录">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-line-2">退出</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="settings-container">
+            
+            <aside class="settings-sidebar">
+                <h3>账户设置</h3>
+                <ul class="settings-nav">
+                    <li class="settings-nav-item active" data-tab="address">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        收货地址管理
+                    </li>
+                    <li class="settings-nav-item" data-tab="account">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        账户信息
+                    </li>
+                    <li class="settings-nav-item" data-tab="password">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        修改密码
+                    </li>
+                </ul>
+            </aside>
+
+            
+            <main class="settings-content">
+                
+                <div class="settings-panel active" id="panel-address">
+                    <div class="panel-header">
+                        <h2>收货地址管理</h2>
+                        <button class="btn btn-primary" onclick="openAddressModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            添加新地址
+                        </button>
+                    </div>
+                    <div class="address-list" id="addressList">
+                        
+                    </div>
+                </div>
+
+                
+                <div class="settings-panel" id="panel-account">
+                    <div class="panel-header">
+                        <h2>账户信息</h2>
+                    </div>
+                    <div class="account-info">
+                        <div class="info-item">
+                            <label>用户名</label>
+                            <div class="info-value" id="accountUsername">--</div>
+                        </div>
+                        <div class="info-item">
+                            <label>注册时间</label>
+                            <div class="info-value" id="accountRegTime">--</div>
+                        </div>
+                        <div class="info-item">
+                            <label>订单数量</label>
+                            <div class="info-value" id="accountOrders">0 个</div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="settings-panel" id="panel-password">
+                    <div class="panel-header">
+                        <h2>修改密码</h2>
+                    </div>
+                    <form class="password-form" onsubmit="handleChangePassword(event)">
+                        <div class="form-group">
+                            <label for="oldPassword">当前密码</label>
+                            <input type="password" id="oldPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">新密码</label>
+                            <input type="password" id="newPassword" minlength="6" required>
+                            <small>密码长度至少6位</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">确认新密码</label>
+                            <input type="password" id="confirmPassword" minlength="6" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">保存修改</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    
+    <div class="modal" id="addressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">添加收货地址</h3>
+                <button class="modal-close" onclick="closeAddressModal()">&times;</button>
+            </div>
+            <form onsubmit="handleSaveAddress(event)">
+                <div class="form-group">
+                    <label for="addressName">收货人姓名</label>
+                    <input type="text" id="addressName" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressPhone">手机号码</label>
+                    <input type="tel" id="addressPhone" pattern="1[3-9]\d{9}" required>
+                    <small>请输入11位手机号码</small>
+                </div>
+                <div class="form-group">
+                    <label for="addressProvince">省份</label>
+                    <input type="text" id="addressProvince" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressCity">城市</label>
+                    <input type="text" id="addressCity" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressDetail">详细地址</label>
+                    <textarea id="addressDetail" rows="3" required></textarea>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="addressDefault">
+                        设为默认地址
+                    </label>
+                </div>
+                <input type="hidden" id="addressId">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddressModal()">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script>
+        // 页面加载时检查登录状态
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLoginRedirect();
+            loadSettingsData();
+        });
+    </script>
+</body>
+</html>

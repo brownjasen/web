@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子商城 - 注册</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                电子<span>商城</span>
+            </a>
+            <nav>
+                <a href="index.html" class="nav-item">
+                    <span class="nav-line-1">返回</span>
+                    <span class="nav-line-2">首页</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="container" style="max-width: 400px;">
+        <h2 style="text-align: center;">注册新账户</h2>
+        <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" required placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" required placeholder="至少6位字符">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">确认密码</label>
+                <input type="password" id="confirm-password" required placeholder="请再次输入密码">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">立即注册</button>
+            <div style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
+                已有账户？ <a href="login.html" style="color: #007185; text-decoration: none;">去登录</a>
+            </div>
+        </form>
+    </div>
+    <script src="scripts/main.js"></script>
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showToast("两次输入的密码不一致！", "error");
+                return;
+            }
+
+            if (password.length < 6) {
+                showToast("密码长度至少为6位！", "error");
+                return;
+            }
+
+            // Check if user already exists
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[username]) {
+                showToast("该用户名已被注册！", "error");
+                return;
+            }
+
+            // Register user with additional info
+            users[username] = { 
+                password: password,
+                regTime: new Date().toISOString(),
+                createdAt: Date.now()
+            };
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            showToast("注册成功！请登录。");
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子商城 - 订单确认</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                电子<span>商城</span>
+            </a>
+            <nav>
+                <a href="cart.html" class="nav-item nav-cart">
+                    <div class="cart-icon"></div>
+                    <span class="nav-line-2">购物车</span>
+                    <span id="cart-count-badge" class="cart-count">0</span>
+                </a>
+                <div id="user-menu-container">
+                    <a href="login.html" class="nav-item">
+                        <span class="nav-line-1">你好, 请登录</span>
+                        <span class="nav-line-2">账户列表</span>
+                    </a>
+                </div>
+                <a href="#" class="nav-item nav-logout" onclick="handleLogout(event)" id="logout-btn" style="display: none;" title="退出登录">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-line-2">退出</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="container" style="text-align: center; max-width: 800px;">
+        <div style="padding: 40px; border: 1px solid #4CAF50; border-radius: 8px; background-color: #f9fff9;">
+            <h2 style="color: #28a745; margin-top: 0;">✅ 订单提交成功！</h2>
+            <p style="font-size: 1.1rem;">感谢您的购买，我们会尽快为您发货。</p>
+            <p style="color: #666;">订单号: <span id="order-id"></span></p>
+            <div style="margin-top: 2rem;">
+                 <a href="index.html" class="btn btn-primary">继续购物</a>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Clear cart on order page
+        localStorage.removeItem('cart');
+        document.getElementById('order-id').innerText = Date.now();
+    </script>
+</body>
+</html>
+

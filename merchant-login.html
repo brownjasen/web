@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商家登录 - 电子商城</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                电子<span>商城</span>
+            </a>
+            <nav>
+                <a href="index.html" class="nav-item">
+                    <span class="nav-line-1">返回</span>
+                    <span class="nav-line-2">首页</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="container" style="max-width: 400px;">
+        <h2 style="text-align: center; color: #ff6b35;">🏪 商家管理登录</h2>
+        <form onsubmit="handleMerchantLogin(event)">
+            <div class="form-group">
+                <label for="merchant-username">商家账号</label>
+                <input type="text" id="merchant-username" required placeholder="请输入商家账号">
+            </div>
+            <div class="form-group">
+                <label for="merchant-password">密码</label>
+                <input type="password" id="merchant-password" required placeholder="请输入密码">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; background: #ff6b35;">商家登录</button>
+            <div style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #666;">
+                默认账号: <strong>admin</strong> / 密码: <strong>123456</strong>
+            </div>
+        </form>
+    </div>
+    <script src="scripts/main.js"></script>
+    <script>
+        function handleMerchantLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('merchant-username').value.trim();
+            const password = document.getElementById('merchant-password').value;
+            
+            // 简单验证，实际项目中应该从服务器验证
+            if (username === 'admin' && password === '123456') {
+                localStorage.setItem('merchantUser', username);
+                showToast('商家登录成功！', 'success');
+                setTimeout(() => {
+                    window.location.href = 'merchant-dashboard.html';
+                }, 1000);
+            } else {
+                showToast('账号或密码错误！', 'error');
+            }
+        }
+    </script>
+</body>
+</html>
